@@ -1,0 +1,75 @@
+swagger: '2.0'
+info:
+  title: Product Category and Cart API
+  version: 1.0.0
+paths:
+  /categories:
+    get:
+      summary: Getting all product categories
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProductCategory'
+    post:
+      summary: Create a new product category
+      parameters:
+        - name: category
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductCategory'
+      responses:
+        201:
+          description: Created
+        400:
+          description: Bad Request
+
+  /categories/{categoryId}:
+    parameters:
+      - name: categoryId
+        in: path
+        required: true
+        type: integer
+    get:
+      summary: Get a product category by ID
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ProductCategory'
+        404:
+          description: Not Found
+    put:
+      summary: Update a product category by ID
+      parameters:
+        - name: category
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductCategory'
+      responses:
+        200:
+          description: OK
+        404:
+          description: Not Found
+    delete:
+      summary: Delete a product category by ID
+      responses:
+        204:
+          description: No Content
+        404:
+          description: Not Found
+
+definitions:
+  ProductCategory:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      description:
+        type: string
